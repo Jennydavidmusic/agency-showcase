@@ -519,9 +519,9 @@ video[playsinline] {
 
 .gallery-grid img{
     width:100%;
-    height:auto;
+    height:360px;
     display:block;
-    object-fit:contain;
+    object-fit:cover;
     border-radius:22px;
     background:#111;
     box-shadow:0 12px 35px rgba(0,0,0,.35);
@@ -565,6 +565,8 @@ video[playsinline] {
 
 .gallery-grid img{
     grid-column:auto!important;
+    height:auto;
+    object-fit:contain;
 }
 
 }
