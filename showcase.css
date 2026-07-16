@@ -481,3 +481,32 @@ video[playsinline] {
   display: block;
   width: 100%;
 }
+.video-play-button {
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease,
+    transform 0.22s ease;
+}
+
+.video-play-button.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.94);
+}
+
+.showreel-player,
+.short-frame {
+  position: relative;
+}
+
+.managed-video {
+  display: block;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Avant lecture : pas de contrôles natifs, uniquement la vignette et Play. */
+.managed-video:not([controls])::-webkit-media-controls {
+  display: none !important;
+}
