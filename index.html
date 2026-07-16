@@ -1,104 +1,328 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050505">
-<title>Jenny & David | Private Live Showcase</title>
-<meta name="description" content="Private presentation of Jenny & David, a live music duo creating the energy of a full band.">
-<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
-<meta property="og:title" content="Jenny & David | Live Showcase">
-<meta property="og:description" content="Two musicians. The energy of a full band. 100% live, no backing tracks.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="assets/business-card.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="showcase.css">
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#050505">
+
+  <title>Jenny &amp; David | Private Live Showcase</title>
+
+  <meta
+    name="description"
+    content="Private presentation of Jenny & David, a live music duo creating the energy of a full band."
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow, noarchive, nosnippet"
+  >
+
+  <meta
+    name="googlebot"
+    content="noindex, nofollow, noarchive, nosnippet"
+  >
+
+  <meta
+    property="og:title"
+    content="Jenny & David | Live Showcase"
+  >
+
+  <meta
+    property="og:description"
+    content="Two musicians. The energy of a full band. 100% live, no backing tracks."
+  >
+
+  <meta property="og:type" content="website">
+
+  <meta
+    property="og:image"
+    content="assets/business-card.webp"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="showcase.css">
 </head>
+
 <body>
+
 <main>
-<section class="hero-photo">
-  <div class="hero-card">
-    <img src="assets/live-photo.webp" alt="Jenny and David performing live">
-  </div>
-  <div class="hero-text">
-    <p class="eyebrow">Private live showcase</p>
-    <h1>Jenny &amp; David</h1>
-    <p class="hero-slogan">Sounds Like a Full Band.</p>
-    <p class="hero-copy">Live looping, layered guitar and vocals — everything performed live.</p>
-  </div>
-</section>
 
-<section class="showreel-section" aria-label="Jenny and David live showreel">
-  <div class="section-heading showreel-heading">
-    <p class="eyebrow">Watch the show</p>
-    <h2>See the live experience.</h2>
-  </div>
+  <section class="hero-photo">
 
-  <div class="showreel-player">
-    <video id="heroVideo" class="managed-video" playsinline preload="metadata" poster="assets/live1-poster.jpg" controls>
-      <source src="assets/live1.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
+    <div class="hero-card">
+      <img
+        src="assets/live-photo.webp"
+        alt="Jenny and David performing live"
+      >
+    </div>
 
-    <button class="video-play-button main-play-button" type="button" data-video-target="heroVideo" aria-label="Play showreel">
-      <span aria-hidden="true">▶</span><strong>Play</strong>
-    </button>
-  </div>
-</section>
-<section class="content-section">
-  <div class="section-heading">
-    <p class="eyebrow">Featured performances</p>
-    <h2>Live moments</h2>
-  </div>
-  <div class="shorts-grid">
-    <article class="episode-card">
-      <div class="short-frame">
-        <video id="coldplayVideo" class="managed-video" playsinline preload="metadata" controls>
-          <source src="assets/coldplay-short.mp4" type="video/mp4">
-        </video>
-        <button class="video-play-button short-play-button" type="button" data-video-target="coldplayVideo" aria-label="Play Viva La Vida"><span aria-hidden="true">▶</span></button>
-      </div>
-      <div class="episode-copy"><div><strong>Viva La Vida</strong><span>Coldplay</span></div></div>
-    </article>
-    <article class="episode-card">
-      <div class="short-frame">
-        <video id="cranberriesVideo" class="managed-video" playsinline preload="metadata" controls>
-          <source src="assets/cranberries-short.mp4" type="video/mp4">
-        </video>
-        <button class="video-play-button short-play-button" type="button" data-video-target="cranberriesVideo" aria-label="Play Zombie"><span aria-hidden="true">▶</span></button>
-      </div>
-      <div class="episode-copy"><div><strong>Zombie</strong><span>The Cranberries</span></div></div>
-    </article>
-  </div>
-</section>
+    <div class="hero-text">
+      <p class="eyebrow">Private live showcase</p>
 
-<section class="content-section">
-  <div class="section-heading">
-    <p class="eyebrow">What to expect</p>
-    <h2>What clients can expect.</h2>
-  </div>
-  <div class="feature-grid">
-    <article class="feature-card"><h3>Full-band energy</h3><p>Guitar, rhythm, vocals and harmonies built live on stage.</p></article>
-    <article class="feature-card"><h3>Flexible atmosphere</h3><p>From relaxed background music to a full singalong set.</p></article>
-    <article class="feature-card"><h3>100% live</h3><p>No backing tracks. Every layer is performed live.</p></article>
-    <article class="feature-card"><h3>London experience</h3><p>Performing across London since 2016.</p></article>
-  </div>
-</section>
-<section class="agent-panel">
-  <img src="assets/business-card.webp" alt="" aria-hidden="true">
-  <div class="agent-shade"></div>
-  <div class="agent-copy">
-    <p class="eyebrow">Booking information</p>
-    <h2>Available through your booking agent.</h2>
-    <p>For availability, pricing and booking details, please contact the agent who shared this presentation.</p>
-  </div>
-</section>
+      <h1>Jenny &amp; David</h1>
 
-<footer>Private client presentation · Not indexed by search engines</footer>
+      <p class="hero-slogan">
+        Sounds Like a Full Band.
+      </p>
+
+      <p class="hero-copy">
+        Live looping, layered guitar and vocals —
+        everything performed live.
+      </p>
+    </div>
+
+  </section>
+
+
+  <section
+    class="showreel-section"
+    aria-label="Jenny and David live showreel"
+  >
+
+    <div class="section-heading showreel-heading">
+      <p class="eyebrow">Watch the show</p>
+
+      <h2>See the live experience.</h2>
+    </div>
+
+
+    <div class="showreel-player">
+
+      <video
+        id="heroVideo"
+        class="managed-video"
+        playsinline
+        preload="metadata"
+        poster="assets/live1-poster.jpg"
+        controls
+      >
+        <source
+          src="assets/live1.mp4"
+          type="video/mp4"
+        >
+
+        Your browser does not support HTML5 video.
+      </video>
+
+
+      <button
+        class="video-play-button main-play-button"
+        type="button"
+        data-video-target="heroVideo"
+        aria-label="Play video"
+      >
+        <span aria-hidden="true">▶</span>
+        <strong>Play</strong>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section class="content-section">
+
+    <div class="section-heading">
+      <p class="eyebrow">Featured performances</p>
+
+      <h2>Live moments</h2>
+    </div>
+
+
+    <div class="shorts-grid">
+
+      <article class="episode-card">
+
+        <div class="short-frame">
+
+          <video
+            id="coldplayVideo"
+            class="managed-video"
+            playsinline
+            preload="metadata"
+            poster="assets/coldplay-poster.jpg"
+            controls
+          >
+            <source
+              src="assets/coldplay-short.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+
+          <button
+            class="video-play-button short-play-button"
+            type="button"
+            data-video-target="coldplayVideo"
+            aria-label="Play Viva La Vida"
+          >
+            <span aria-hidden="true">▶</span>
+          </button>
+
+        </div>
+
+
+        <div class="episode-copy">
+          <div>
+            <strong>Viva La Vida</strong>
+            <span>Coldplay</span>
+          </div>
+        </div>
+
+      </article>
+
+
+      <article class="episode-card">
+
+        <div class="short-frame">
+
+          <video
+            id="cranberriesVideo"
+            class="managed-video"
+            playsinline
+            preload="metadata"
+            poster="assets/cranberries-poster.jpg"
+            controls
+          >
+            <source
+              src="assets/cranberries-short.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+
+          <button
+            class="video-play-button short-play-button"
+            type="button"
+            data-video-target="cranberriesVideo"
+            aria-label="Play Zombie"
+          >
+            <span aria-hidden="true">▶</span>
+          </button>
+
+        </div>
+
+
+        <div class="episode-copy">
+          <div>
+            <strong>Zombie</strong>
+            <span>The Cranberries</span>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <section class="content-section">
+
+    <div class="section-heading">
+      <p class="eyebrow">What to expect</p>
+
+      <h2>What clients can expect.</h2>
+    </div>
+
+
+    <div class="feature-grid">
+
+      <article class="feature-card">
+        <h3>Full-band energy</h3>
+
+        <p>
+          Guitar, rhythm, vocals and harmonies
+          built live on stage.
+        </p>
+      </article>
+
+
+      <article class="feature-card">
+        <h3>Flexible atmosphere</h3>
+
+        <p>
+          From relaxed background music
+          to a full singalong set.
+        </p>
+      </article>
+
+
+      <article class="feature-card">
+        <h3>100% live</h3>
+
+        <p>
+          No backing tracks.
+          Every layer is performed live.
+        </p>
+      </article>
+
+
+      <article class="feature-card">
+        <h3>London experience</h3>
+
+        <p>
+          Performing across London since 2016.
+        </p>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <section class="agent-panel">
+
+    <img
+      src="assets/business-card.webp"
+      alt=""
+      aria-hidden="true"
+    >
+
+    <div class="agent-shade"></div>
+
+
+    <div class="agent-copy">
+      <p class="eyebrow">Booking information</p>
+
+      <h2>
+        Available through your booking agent.
+      </h2>
+
+      <p>
+        For availability, pricing and booking details,
+        please contact the agent who shared this presentation.
+      </p>
+    </div>
+
+  </section>
+
+
+  <footer>
+    Private client presentation · Not indexed by search engines
+  </footer>
+
 </main>
+
+
 <script src="showcase.js"></script>
+
 </body>
 </html>
