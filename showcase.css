@@ -510,25 +510,16 @@ video[playsinline] {
 .managed-video:not([controls])::-webkit-media-controls {
   display: none !important;
 }
-.gallery-grid-two{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:24px;
+.gallery-single{
     margin-top:32px;
 }
 
-.gallery-grid-two img{
+.gallery-single img{
     width:100%;
+    max-width:900px;
     height:auto;
     display:block;
+    margin:auto;
     border-radius:22px;
     box-shadow:0 12px 35px rgba(0,0,0,.35);
-}
-
-@media (max-width:900px){
-
-    .gallery-grid-two{
-        grid-template-columns:1fr;
-    }
-
 }
