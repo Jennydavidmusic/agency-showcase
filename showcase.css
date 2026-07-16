@@ -510,62 +510,23 @@ video[playsinline] {
 .managed-video:not([controls])::-webkit-media-controls {
   display: none !important;
 }
-.gallery-grid{
+.gallery-grid-two{
     display:grid;
-    grid-template-columns:repeat(12,1fr);
-    gap:18px;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
     margin-top:32px;
 }
 
-.gallery-grid img{
+.gallery-grid-two img{
     width:100%;
-    height:320px;
+    height:auto;
     display:block;
-    object-fit:cover;
     border-radius:22px;
     box-shadow:0 12px 35px rgba(0,0,0,.35);
-    transition:.35s;
 }
 
-.gallery-grid img:hover{
-    transform:scale(1.02);
-}
-
-.gallery-grid img:nth-child(1){
-    grid-column:span 7;
-}
-
-.gallery-grid img:nth-child(2){
-    grid-column:span 5;
-}
-
-.gallery-grid img:nth-child(3){
-    grid-column:span 5;
-}
-
-.gallery-grid img:nth-child(4){
-    grid-column:span 7;
-}
-
-.gallery-grid img:nth-child(5){
-    grid-column:span 6;
-}
-
-.gallery-grid img:nth-child(6){
-    grid-column:span 6;
-}
-
-
-@media(max-width:900px){
-
-.gallery-grid{
-    grid-template-columns:1fr;
-}
-
-.gallery-grid img{
-    grid-column:auto!important;
-    height:auto;
-    aspect-ratio:4/3;
-}
-
+@media (max-width:900px){
+    .gallery-grid-two{
+        grid-template-columns:1fr;
+    }
 }
