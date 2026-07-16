@@ -8,59 +8,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const getPlayButton = (video) =>
     document.querySelector(`[data-video-target="${video.id}"]`);
 
-  const showPlayButton = (video) => {
+  const showPosterState = (video) => {
     const button = getPlayButton(video);
     const container = getContainer(video);
+
+    video.pause();
+    video.currentTime = 0;
+    video.removeAttribute("controls");
+    video.load();
 
     button?.classList.remove("is-hidden");
     container?.classList.remove("is-playing");
-
-    // Les contrôles restent cachés avant lecture.
-    video.removeAttribute("controls");
   };
 
-  const hidePlayButton = (video) => {
+  const showPlayingState = (video) => {
     const button = getPlayButton(video);
     const container = getContainer(video);
 
+    video.setAttribute("controls", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
     button?.classList.add("is-hidden");
     container?.classList.add("is-playing");
-
-    // Les contrôles apparaissent dès que la vidéo démarre.
-    video.setAttribute("controls", "");
   };
 
   const stopOtherVideos = (activeVideo) => {
     videos.forEach((video) => {
-      if (video === activeVideo) return;
-
-      if (!video.paused) {
-        video.pause();
+      if (video !== activeVideo) {
+        showPosterState(video);
       }
-
-      showPlayButton(video);
     });
   };
 
   const playVideo = async (video) => {
     stopOtherVideos(video);
+    showPlayingState(video);
 
     try {
-      // playsInline évite le plein écran automatique sur iPhone.
-      video.playsInline = true;
-      video.setAttribute("playsinline", "");
-      video.setAttribute("webkit-playsinline", "");
-
       await video.play();
-      hidePlayButton(video);
     } catch (error) {
       console.warn("Video playback could not start.", error);
+      showPosterState(video);
     }
-  };
-
-  const pauseVideo = (video) => {
-    video.pause();
-    showPlayButton(video);
   };
 
   playButtons.forEach((button) => {
@@ -74,65 +64,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   videos.forEach((video) => {
-    // Au chargement : vignette + bouton Play, sans contrôles.
-    showPlayButton(video);
+    // État initial : vignette + bouton Play, sans contrôles.
+    showPosterState(video);
 
+    // Si la lecture démarre depuis les contrôles natifs,
+    // les autres vidéos sont remises à leur vignette.
     video.addEventListener("play", () => {
       stopOtherVideos(video);
-      hidePlayButton(video);
+      showPlayingState(video);
     });
 
+    // Pause manuelle : on laisse l'image arrêtée et les contrôles visibles.
+    // Aucun clic personnalisé n'intercepte les boutons natifs.
     video.addEventListener("pause", () => {
-      showPlayButton(video);
+      const container = getContainer(video);
+      container?.classList.remove("is-playing");
     });
 
+    // Fin : retour complet à la vignette et au bouton Play.
     video.addEventListener("ended", () => {
-      video.pause();
-      video.currentTime = 0;
-      video.load();
-      showPlayButton(video);
+      showPosterState(video);
     });
-
-    // Clic ou toucher sur l'image : lecture/pause.
-    video.addEventListener("click", (event) => {
-      const rect = video.getBoundingClientRect();
-      const y = event.clientY - rect.top;
-      const controlsAreaHeight = 60;
-
-      // Laisse les contrôles natifs fonctionner en bas de la vidéo.
-      if (y > rect.height - controlsAreaHeight) return;
-
-      event.preventDefault();
-
-      if (video.paused) {
-        playVideo(video);
-      } else {
-        pauseVideo(video);
-      }
-    });
-
-    // Sécurité iPhone/iPad.
-    video.addEventListener(
-      "touchend",
-      (event) => {
-        const touch = event.changedTouches[0];
-        if (!touch) return;
-
-        const rect = video.getBoundingClientRect();
-        const y = touch.clientY - rect.top;
-        const controlsAreaHeight = 60;
-
-        if (y > rect.height - controlsAreaHeight) return;
-
-        event.preventDefault();
-
-        if (video.paused) {
-          playVideo(video);
-        } else {
-          pauseVideo(video);
-        }
-      },
-      { passive: false }
-    );
   });
 });
