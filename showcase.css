@@ -531,7 +531,11 @@ video[playsinline] {
 .gallery-grid img:hover{
     transform:scale(1.02);
 }
-
+.gallery-grid img:nth-child(1),
+.gallery-grid img:nth-child(3){
+    object-fit:contain;
+    background:#111;
+}
 .gallery-grid img:nth-child(1){
     grid-column:span 7;
 }
