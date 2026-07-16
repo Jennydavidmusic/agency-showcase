@@ -1,60 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const videos = Array.from(
-    document.querySelectorAll(".managed-video")
-  );
+  const videos = Array.from(document.querySelectorAll(".managed-video"));
+  const playButtons = Array.from(document.querySelectorAll("[data-video-target]"));
 
-  const playButtons = Array.from(
-    document.querySelectorAll("[data-video-target]")
-  );
+  const getContainer = (video) =>
+    video.closest(".showreel-player, .short-frame");
 
+  const getPlayButton = (video) =>
+    document.querySelector(`[data-video-target="${video.id}"]`);
 
-  function getContainer(video) {
-    return video.closest(".showreel-player, .short-frame");
-  }
-
-
-  function getPlayButton(video) {
-    return document.querySelector(
-      `[data-video-target="${video.id}"]`
-    );
-  }
-
-
-  function showPlayButton(video) {
+  const showPlayButton = (video) => {
     const button = getPlayButton(video);
-
-    if (button) {
-      button.classList.remove("is-hidden");
-    }
-
     const container = getContainer(video);
 
-    if (container) {
-      container.classList.remove("is-playing");
-    }
-  }
+    button?.classList.remove("is-hidden");
+    container?.classList.remove("is-playing");
 
+    // Les contrôles restent cachés avant lecture.
+    video.removeAttribute("controls");
+  };
 
-  function hidePlayButton(video) {
+  const hidePlayButton = (video) => {
     const button = getPlayButton(video);
-
-    if (button) {
-      button.classList.add("is-hidden");
-    }
-
     const container = getContainer(video);
 
-    if (container) {
-      container.classList.add("is-playing");
-    }
-  }
+    button?.classList.add("is-hidden");
+    container?.classList.add("is-playing");
 
+    // Les contrôles apparaissent dès que la vidéo démarre.
+    video.setAttribute("controls", "");
+  };
 
-  function stopOtherVideos(activeVideo) {
+  const stopOtherVideos = (activeVideo) => {
     videos.forEach((video) => {
-      if (video === activeVideo) {
-        return;
-      }
+      if (video === activeVideo) return;
 
       if (!video.paused) {
         video.pause();
@@ -62,85 +40,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
       showPlayButton(video);
     });
-  }
+  };
 
-
-  async function playVideo(video) {
+  const playVideo = async (video) => {
     stopOtherVideos(video);
 
     try {
+      // playsInline évite le plein écran automatique sur iPhone.
+      video.playsInline = true;
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
+
       await video.play();
       hidePlayButton(video);
     } catch (error) {
       console.warn("Video playback could not start.", error);
     }
-  }
+  };
 
-
-  function pauseVideo(video) {
+  const pauseVideo = (video) => {
     video.pause();
     showPlayButton(video);
-  }
-
+  };
 
   playButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
 
-      const videoId = button.dataset.videoTarget;
-      const video = document.getElementById(videoId);
-
-      if (!video) {
-        return;
-      }
-
-      playVideo(video);
+      const video = document.getElementById(button.dataset.videoTarget);
+      if (video) playVideo(video);
     });
   });
 
-
   videos.forEach((video) => {
+    // Au chargement : vignette + bouton Play, sans contrôles.
+    showPlayButton(video);
+
     video.addEventListener("play", () => {
       stopOtherVideos(video);
       hidePlayButton(video);
     });
 
-
     video.addEventListener("pause", () => {
       showPlayButton(video);
     });
-
 
     video.addEventListener("ended", () => {
       video.pause();
       video.currentTime = 0;
       video.load();
-
       showPlayButton(video);
     });
 
-
-    /*
-      Sur mobile et ordinateur :
-      toucher ou cliquer sur l’image de la vidéo
-      met en pause ou reprend la lecture.
-    */
+    // Clic ou toucher sur l'image : lecture/pause.
     video.addEventListener("click", (event) => {
-      /*
-        On évite de bloquer les contrôles natifs
-        situés dans la partie basse de la vidéo.
-      */
-      const rectangle = video.getBoundingClientRect();
-      const clickPositionY = event.clientY - rectangle.top;
-      const controlsAreaHeight = 55;
+      const rect = video.getBoundingClientRect();
+      const y = event.clientY - rect.top;
+      const controlsAreaHeight = 60;
 
-      const clickedOnControls =
-        clickPositionY > rectangle.height - controlsAreaHeight;
-
-      if (clickedOnControls) {
-        return;
-      }
+      // Laisse les contrôles natifs fonctionner en bas de la vidéo.
+      if (y > rect.height - controlsAreaHeight) return;
 
       event.preventDefault();
 
@@ -151,32 +111,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-
-    /*
-      Sécurité supplémentaire pour iPhone/iPad.
-    */
+    // Sécurité iPhone/iPad.
     video.addEventListener(
       "touchend",
       (event) => {
-        const rectangle = video.getBoundingClientRect();
         const touch = event.changedTouches[0];
+        if (!touch) return;
 
-        if (!touch) {
-          return;
-        }
+        const rect = video.getBoundingClientRect();
+        const y = touch.clientY - rect.top;
+        const controlsAreaHeight = 60;
 
-        const touchPositionY =
-          touch.clientY - rectangle.top;
-
-        const controlsAreaHeight = 55;
-
-        const touchedControls =
-          touchPositionY >
-          rectangle.height - controlsAreaHeight;
-
-        if (touchedControls) {
-          return;
-        }
+        if (y > rect.height - controlsAreaHeight) return;
 
         event.preventDefault();
 
@@ -186,9 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
           pauseVideo(video);
         }
       },
-      {
-        passive: false
-      }
+      { passive: false }
     );
   });
 });
